@@ -34,10 +34,12 @@ import br.edu.ifpe.igarassu.ipi.poo.usn.model.controller.server.user.SearchByNam
 public class SocialNetworkServer {
 	public static void main(String[] args) throws Exception {
 		UserSocialNetworkFacade facade = new SocialNetworkFacade();
+		PostSocialNetFacade fcd = new PostNetFacade();
 
+		addPosts(fcd);
 		populateUsers(facade);
 
-		HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
+		HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
 		// each request has its own handler 
 		server.createContext("/", new RootHandler());
@@ -46,11 +48,19 @@ public class SocialNetworkServer {
 		server.createContext("/user/remove", new RemoveUserByIdHandler(facade));
 		server.createContext("/user/search", new SearchByNameUserHandler(facade));
 		server.createContext("/user/list", new ListUserHandler(facade));
+		
+		server.createContext("/post/list", new ListPost(fcd));
+		server.createContext("/post/add", new AddPost(facade));
+		
 		server.setExecutor(null);
 
 		server.start();
 	}
 
+	private static void addPosts(PostSocialNetFacade fcd) {
+		fcd.addPost(new Post("Gui", "Testanto o teste para ser testado"));
+	}
+	
 	private static void populateUsers(UserSocialNetworkFacade facade) {
 		facade.addUser(new User(0, "Carla", "312"));
 		facade.addUser(new User(1, "Carlos", "541"));
