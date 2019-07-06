@@ -20,12 +20,15 @@ import br.edu.ifpe.igarassu.ipi.poo.usn.data.entity.Entity;
  * @author Allan Diego Silva Lima - allan.lima@igarassu.ifpe.edu.br
  *
  */
-public class User extends Entity {
+public class User extends Entity{
 	// the name of the user
 	private String name;
-	
 	// the passord of the user
 	private String password;
+	// the email of the user
+	private String email;
+	// the phone of the user
+	private String phone;
 
 	/**
 	 * 
@@ -35,10 +38,12 @@ public class User extends Entity {
 	 * @param name the name of the user
 	 * @param password the password of the user
 	 */
-	public User(long id, String name, String password) {
+	public User(long id, String name, String password, String email, String phone) {
 		super(id);
 		this.name = name;
 		this.password = password;
+		this.email = email;
+		this.phone = phone;
 	}
 
 	/**
@@ -80,5 +85,35 @@ public class User extends Entity {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * @return the phone
+	 */
+	public String getPhone() {
+		return phone;
+	}
+
+	/**
+	 * @param phone the phone to set
+	 */
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	
+	
 
 }
